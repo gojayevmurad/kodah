@@ -1,0 +1,383 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@100;200;300;400;500;600;700&display=swap");
+@import "mixins";
+
+:root {
+  --font-primary: "Open Sans", sans-serif;
+  --font-secondary: "Josefin Slab", serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+a {
+  color: black;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  @include desktop {
+    max-width: 900px;
+  }
+
+  @include tablet {
+    max-width: 100%;
+  }
+
+  // @include mobile {
+  //   max-width: 720px;
+  // }
+
+  // @include extra-small {
+  //   max-width: 100%;
+  // }
+}
+
+// COMPONENTS
+.nav {
+  font-family: var(--font-secondary);
+  box-shadow: 0 0 20px 5px rgba(80, 75, 75, 0.192);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  // COMPONENTS
+
+  label {
+    width: 45px;
+    height: 8px;
+    background-color: black;
+    position: relative;
+    display: none;
+    cursor: pointer;
+  }
+
+  label::before {
+    content: "";
+    width: 45px;
+    height: 8px;
+    background-color: black;
+    position: absolute;
+    top: 10px;
+    transition: 0.3s;
+  }
+  label::after {
+    content: "";
+    width: 45px;
+    height: 8px;
+    background-color: black;
+    position: absolute;
+    top: -10px;
+    transition: 0.3s;
+  }
+
+  input {
+    display: none;
+  }
+
+  &--content {
+    padding: 25px 0;
+    @include d-flex(space-between, center);
+
+    ul {
+      @include d-flex;
+      gap: 20px;
+      font-weight: 600;
+      li {
+        border-bottom: 1px solid transparent;
+      }
+
+      li:hover {
+        border-bottom: 1px solid black;
+      }
+    }
+  }
+
+  // RESPONSIVE
+  @include tablet {
+    ul {
+      padding: 0 10px;
+      transform: scaleY(0);
+      transition: 0.3s;
+      position: absolute;
+      top: 50px;
+      flex-direction: column;
+      align-items: flex-end;
+      width: 100%;
+      background-color: white;
+      top: 0;
+    }
+    label {
+      display: block;
+    }
+
+    input:checked ~ label::before {
+      transform: rotate(45deg);
+      top: 0;
+    }
+    input:checked ~ label::after {
+      transform: rotate(-45deg);
+      top: 0;
+    }
+    input:checked ~ label {
+      height: 0;
+    }
+    input:checked ~ ul {
+      transform: scaleY(1);
+      top: 70px;
+    }
+  }
+}
+
+.intro {
+  margin-top: 100px;
+  &--content {
+    @include d-flex;
+
+    * {
+      font-family: var(--font-secondary);
+    }
+
+    gap: 40px;
+
+    img {
+      height: 450px;
+      width: 480px;
+      object-fit: cover;
+    }
+
+    &__text {
+      .text--contents {
+        width: 50%;
+        margin: 0 auto;
+        @include d-flex(center, start, column);
+        gap: 60px;
+        h1 {
+          font-size: 3rem;
+          font-weight: 600;
+          @include tablet {
+            font-size: 2rem;
+          }
+        }
+        p {
+          font-size: 1.5rem;
+          font-weight: 600;
+          @include tablet {
+            font-size: 1rem;
+          }
+        }
+        span {
+          font-size: 0.9rem;
+          font-weight: 600;
+          @include tablet {
+            font-size: 0.8rem;
+          }
+        }
+
+        @include mobile {
+          gap: 20px;
+        }
+      }
+    }
+
+    // RESPONSIVE
+    @include tablet {
+      img {
+        width: 400px;
+        height: 370px;
+      }
+    }
+
+    @include mobile {
+      flex-direction: column;
+      .text--contents {
+        width: 90%;
+      }
+    }
+
+    @include extra-small {
+      img {
+        width: 90%;
+      }
+    }
+    @include tablet {
+      padding: 0 20px;
+    }
+    @include mobile {
+      padding: 0;
+    }
+  }
+}
+
+.routes {
+  &--content {
+    @include d-flex(center, center, column);
+    h2 {
+      text-align: center;
+      font-family: var(--font-secondary);
+      font-size: 2.5rem;
+      font-weight: 500;
+      padding-top: 150px;
+      padding-bottom: 50px;
+    }
+
+    &--cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 30px;
+      row-gap: 40px;
+      .card {
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 300px;
+        }
+
+        h5,
+        p,
+        span {
+          margin-top: 5px;
+        }
+
+        h5 {
+          a {
+            font-family: var(--font-secondary);
+            font-size: 1.2rem;
+          }
+        }
+
+        p {
+          a {
+            opacity: 0.8;
+            font-family: var(--font-primary);
+            font-weight: 200;
+            font-size: .8rem;
+          }
+        }
+
+        span {
+          display: inline-block;
+          a {
+            font-weight: 100;
+            font-family: var(--font-primary);
+            opacity: 0.8;
+            font-size: .8rem;
+          }
+        }
+      }
+      @include mobile {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    button{
+      cursor: pointer;
+      font-family: var(--font-secondary);
+      font-size: 1rem;
+      font-weight: 600;
+      background-color: white;
+      border: 1px solid black;
+      padding: 16px 32px;
+      margin: 30px 0;
+    }
+    button:hover{
+      background-color: black;
+      color: white;
+    }
+
+    @include tablet {
+      padding: 0 20px;
+    }
+  }
+}
+
+.gallery{
+  &--content{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    gap: 10px;
+    margin: 90px 0;
+
+    img{
+      width: 100%;
+      height: 100%;
+    }
+
+    @include tablet{
+      padding: 0 20px;
+    }
+
+    @include mobile{
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, 1fr);
+    }
+    
+  }
+}
+
+.footer{
+  margin-bottom: 30px;
+  padding: 50px 0;
+  @include tablet{
+    padding: 0 20px;
+  }
+  &--content{
+    @include d-flex(space-between);
+    &--form{
+      form{
+        @include d-flex(center, start, column);
+        gap: 10px;
+        p{
+          font-family: var(--font-primary);
+          font-size: 15px;
+        }
+
+        input{
+          border: none;
+          outline: none;
+          width: 300px;
+          padding: 15px 16px;
+          background-color: rgba(0, 0, 0, 0.068);
+        }
+
+        button{
+          cursor: pointer;
+          padding: 16px 40px;
+          border: 1px solid black;
+          background-color: white;
+          transition: .3s;
+        }
+        button:hover{
+          background-color: black;
+          color: white;
+        }
+      }
+    }
+    &--sociall{
+      align-self: flex-start;
+      svg{
+        width: 20px;
+        margin-left: 9px;
+      }
+      @include tablet{
+        display: none;
+      }
+    }
+  
+  }
+}
+
+
+::placeholder{
+  color: rgba(0, 0, 0, 0.178);
+}
